@@ -1,34 +1,28 @@
 #!/bin/sh
 
-# GET BREW
+# get brew
 if ! command -v brew >/dev/null; then
   echo "Installing Homebrew ..."
   curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install'
   export PATH="/usr/local/bin:$PATH"
 fi
 
-number_of_cores=$(sysctl -n hw.ncpu)
-brew config --global jobs $($number_of_cores - 1)
-
-# GET DEPENDENCIES FROM BREW
-
+# get dependencies from brew
 brew update --force
 brew bundle --file=Brewfile || true
-
-# SETUP DOCKER CONTAINERS
 
 # kill all processes using port 5432
 lsof -i :5432 | grep -ioh " \d\+ " | xargs kill -9
 
-# ITERATE THROUGH FOLDERS IN THE PARENT PATH AND BUILD RUN DOCKER
-# IF THEY CONTAIN A DOCKERFILE
+
 for i in ../*; do
+  # iterate through folders in the parent path and build run docker
   if [ -d "$i" ];
   then
     cd $i
-    if [ -f Dockerfile ]
-    then
-      docker build . -f Dockerfile
+    # if there is a docker-compose.yml
+    if [ -f docker-compose.yml ]; then
+      # start the container
       docker-compose up -d
     fi
   fi
