@@ -2,7 +2,9 @@
 
 ## Mac
 
-Before running the scripts make sure your current directory is the root of the project.
+Before running the scripts make sure:
+ 1. Your current directory is the *devbox root*.
+ 2. Devbox is in the *same directory* as other etheroscope repos.
 
 Follow the following instructions:
   1. `cd ./apps/devbox`
