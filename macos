@@ -1,0 +1,25 @@
+#!/bin/sh
+
+# GET BREW
+if ! command -v brew >/dev/null; then
+  echo "Installing Homebrew ..."
+  curl -fsS 'https://raw.githubusercontent.com/Homebrew/install/master/install'
+  export PATH="/usr/local/bin:$PATH"
+fi
+
+number_of_cores=$(sysctl -n hw.ncpu)
+brew config --global jobs $($number_of_cores - 1)
+
+# GET DEPENDENCIES FROM BREW
+
+brew update --force
+brew bundle --file=Brewfile || true
+
+# SETUP DOCKER CONTAINERS
+
+# kill all processes using port 5432
+lsof -i :5432 | grep -ioh " \d\+ " | xargs kill -9
+
+cd ..
+docker build . -f Dockerfile -t etheroscope_umbrella/etheroscope
+docker-compose up -d
