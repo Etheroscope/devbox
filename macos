@@ -20,6 +20,16 @@ brew bundle --file=Brewfile || true
 # kill all processes using port 5432
 lsof -i :5432 | grep -ioh " \d\+ " | xargs kill -9
 
-cd ..
-docker build . -f Dockerfile -t etheroscope_umbrella/etheroscope
-docker-compose up -d
+# ITERATE THROUGH FOLDERS IN THE PARENT PATH AND BUILD RUN DOCKER
+# IF THEY CONTAIN A DOCKERFILE
+for i in ../*; do
+  if [ -d "$i" ];
+  then
+    cd $i
+    if [ -f Dockerfile ]
+    then
+      docker build . -f Dockerfile
+      docker-compose up -d
+    fi
+  fi
+done
