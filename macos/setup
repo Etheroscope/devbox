@@ -11,4 +11,4 @@ fi
 brew update --force
 brew bundle --file=Brewfile || true
 
-./start_docker
+../start_docker
