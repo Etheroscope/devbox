@@ -1,19 +1,20 @@
 # Devbox
 
-## Mac
-
 Before running the scripts make sure:
  1. Your current directory is the *devbox root*.
  2. Devbox is in the *same directory* as other etheroscope repos.
 
-To setup your macOS computer for development for the Etheroscope project, run `./macos/setup` (if that fails, run `chmod +x macos` and try again), grab a coffee, sit back and wait for everything to be done for you.
+## What this does.
 
-The script will:
-  - Install: `brew`, `git`, `elixir`, `npm` and `docker` (if they are missing)
-  - Build & run development servers for:
-    - etheroscope_ex
-    - etheroscope_js
+- Installs necessary dependencies (e.g. `git`, `docker`...)
+- Build & run development servers for:
+  - etheroscope_ex
+  - etheroscope_js
 
-## Windows
+## Setup
 
-Not implemented yet :/
+To run the debox setup:
+  1. Change to the directory of your desired dev OS.
+  2. Run `./setup` (if that fails, run `chmod +x ./macos/setup` and try again), grab a coffee, sit back and wait for everything to be done for you.
+
+(N.B. Linux setup not tested and Windows in development)
