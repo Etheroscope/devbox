@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# kill all processes using port 5432
+lsof -i :5432 | grep -ioh " \d\+ " | xargs kill -9
+
+for i in ../*; do
+  # iterate through folders in the parent path and build run docker
+  if [ -d "$i" ];
+  then
+    cd $i
+    # if there is a docker-compose.yml
+    if [ -f docker-compose.yml ]; then
+      # start the container
+      docker-compose up -d
+    fi
+  fi
+done
