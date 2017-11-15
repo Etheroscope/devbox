@@ -18,3 +18,7 @@ To run the debox setup:
   2. Run `./setup` (if that fails, run `chmod +x ./macos/setup` and try again), grab a coffee, sit back and wait for everything to be done for you.
 
 (N.B. Linux setup not tested and Windows in development)
+
+## Start/Stop Docker
+
+You can both start and stop all docker containers running for etheroscope using the given scripts in root. i.e. just run `./start_docker` or `./stop_docker`.
